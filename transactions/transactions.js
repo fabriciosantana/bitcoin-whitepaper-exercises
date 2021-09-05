@@ -57,6 +57,7 @@ async function addPoem() {
 	Blockchain.blocks.push(bl);
 
 	console.log(Blockchain)
+	console.log(Blockchain.blocks.map((block, blockIndex) => console.log(block.data)))
 
 	return Blockchain;
 }
