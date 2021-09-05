@@ -46,9 +46,10 @@ async function addPoem() {
 
 	for (let line of poem) {
 		transactions.push(
-			createTransaction(line)
-				.then(await autorizeTransaction)
-		)
+			await createTransaction(line)
+				.then(authorizeTransaction)
+				.catch(console.log)
+		);		
 	}
 
 	var bl = createBlock(transactions);
@@ -86,7 +87,7 @@ async function createTransaction(data){
 	return newTransaction;
 }
 
-async function autorizeTransaction(transaction){
+async function authorizeTransaction(transaction) {
 	transaction.pubKey = PUB_KEY_TEXT
 	transaction.signature = await createSignature(transaction.hash,PRIV_KEY_TEXT)
 

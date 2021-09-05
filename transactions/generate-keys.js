@@ -7,13 +7,13 @@ var openpgp = require("openpgp");
 const KEYS_DIR = path.join(__dirname,"keys");
 
 var options = {
-	userIds: [{ name: "Fabricio Santana", email: "fabricio.santana@gmail.com"}],
+	userIds: [{ name: "Fabricio Santana", email: "fabricio.santana@gmail.com" }],
 	numBits: 2048,
-	passphrase: "T3st!ng",
+	passphrase: "",
 };
 
 openpgp.generateKey(options).then(function onGenerated(key) {
-	try { fs.mkdirSync(KEYS_DIR); } catch (err) {console.log(err)}
+	try { fs.mkdirSync(KEYS_DIR); } catch (err) {}
 
 	fs.writeFileSync(path.join(KEYS_DIR,"priv.pgp.key"),key.privateKeyArmored,"utf8");
 	fs.writeFileSync(path.join(KEYS_DIR,"pub.pgp.key"),key.publicKeyArmored,"utf8");
