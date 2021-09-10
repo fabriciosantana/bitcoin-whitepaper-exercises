@@ -22,7 +22,7 @@ var Blockchain = {
 // Genesis block
 Blockchain.blocks.push({
 	index: 0,
-	hash: crypto.createHash("sha256").update("hello world!").digest("hex"),
+	hash: '00000',//crypto.createHash("sha256").update("hello world!").digest("hex"),
 	data: "this is just the begining",
 	timestamp: Date.now(),
 });
@@ -61,13 +61,14 @@ function createBlock(data){
 function blockHash(bl) {
 	return crypto.createHash("sha256").update(
 		`${bl.index};${bl.prevHash};${JSON.stringify(bl.data)};${bl.timestamp}`
+		//JSON.stringify(bl)
 	).digest("hex");
 }
 
 function verifyBlock(bl) {
 	if (bl.data == null) return false;
 	if (bl.index === 0) {
-		if (bl.hash !== "7509e5bda0c762d2bac7f90d758b5b2263fa01ccbc542ab5e3df163be08e6ca9") return false;
+		if (bl.hash !== "00000") return false;
 	}
 	else {
 		if (!bl.prevHash) return false;
